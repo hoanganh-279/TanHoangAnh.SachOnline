@@ -1,7 +1,21 @@
-﻿@{
+﻿@model IEnumerable<TanHoangAnh.SachOnline.Models.SACH>
+
+@{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
+<style type="text/css">
+    .imgbook {
+        transition: all 1s ease-in;
+        width: 400px;
+    }
+
+    .imgbook:hover {
+        transform: scale(0.9);
+        cursor: pointer;
+    }
+</style>
 
 @section NhaXuatBanPartial {
     @Html.Action("NhaXuatBanPartial", "SachOnline")}
@@ -22,83 +36,32 @@
 <hr>
 <div class="row text-center">
 
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/130499.jpg" alt="Thumbnail Image 1" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 1</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
-            </div>
-        </div>
-    </div>
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
+            <div class="card h-100 shadow-sm border">
 
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/130318.jpg" alt="Thumbnail Image 2" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 2</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
-            </div>
-        </div>
-    </div>
+                <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1"
+                     class="card-img-top imgbook"
+                     style="width: 100%; height: 300px; object-fit: contain; padding: 10px;">
 
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/KT0001.jpg" alt="Thumbnail Image 3" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 3</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/130499.jpg" alt="Thumbnail Image 1" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 1</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
-            </div>
-        </div>
-    </div>
+                <div class="card-body">
+                    <h5 class="card-title" style="min-height: 70px;">
+                        <a href="@Url.Action("BookDetail", "SachOnline", new { id = sach.MaSach })" style="text-decoration: none; font-weight: bold;">
+                            @sach.TenSach
+                        </a>
+                    </h5>
 
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/130318.jpg" alt="Thumbnail Image 2" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 2</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
+                    <p class="card-text">
+                        <a href="#" class="btn btn-primary" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            Add to Cart
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="~/Images/KT0001.jpg" alt="Thumbnail Image 3" class="card-img-top imgbook">
-            <div class="card-body">
-                <h5 class="card-title">Sản phẩm 3</h5>
-                <p class="card-text text-muted">Mô tả tóm tắt sản phẩm</p>
-                <a href="#" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
-            </div>
-        </div>
-    </div>
+    }
 
 </div>
 

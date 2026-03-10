@@ -1,15 +1,16 @@
-﻿<ul class="list-group">
+﻿@model IEnumerable<TanHoangAnh.SachOnline.Models.NHAXUATBAN>
 
-    <li class="list-group-item active text-center">
+<ul class="list-group">
+    <li class="list-group-item active text-center" style="font-weight:bold;">
         SÁCH THEO NHÀ XUẤT BẢN
     </li>
 
-    <a href="#" class="list-group-item">Nhà xuất bản Trẻ</a>
-    <a href="#" class="list-group-item">NXB Tổng hợp</a>
-    <a href="#" class="list-group-item">Kim Đồng</a>
-    <a href="#" class="list-group-item">Đại học quốc gia</a>
-    <a href="#" class="list-group-item">Văn hóa</a>
-    <a href="#" class="list-group-item">Lao động</a>
-    <a href="#" class="list-group-item">Khoa học kỹ thuật</a>
-
+    @foreach (var nxb in Model)
+    {
+        <li class="list-group-item">
+            <a href="@Url.Action("SachTheoNXB", "SachOnline", new { id = nxb.MaNXB })" style="text-decoration:none; display:block; color:#333;">
+                @nxb.TenNXB
+            </a>
+        </li>
+    }
 </ul>
