@@ -1,0 +1,49 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-radius: 0;">
+    <div class="container">
+        @Html.ActionLink("SachOnline", "Index", "SachOnline", new { area = "" }, new { @class = "navbar-brand" })
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item bg-black">
+                    <a class="nav-link active text-white px-3" href="#">TRANG CHỦ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#">Liên hệ</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown">
+                        Sách theo chủ đề
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Ngoại ngữ</a></li>
+                        <li><a class="dropdown-item" href="#">Công nghệ thông tin</a></li>
+                        <li><a class="dropdown-item" href="#">Văn học</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown">
+                        Sách theo nhà xuất bản
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Nhà xuất bản Trẻ</a></li>
+                        <li><a class="dropdown-item" href="#">NXB Tổng hợp</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Tìm kiếm" aria-label="Search" style="border-radius: 0;">
+                <button class="btn btn-light" type="submit" style="border-radius: 0;">Tìm</button>
+            </form>
+        </div>
+    </div>
+</nav>
