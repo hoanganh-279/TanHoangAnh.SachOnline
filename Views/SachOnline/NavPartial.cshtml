@@ -8,8 +8,10 @@
 
         <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item bg-black">
-                    <a class="nav-link active text-white px-3" href="#">TRANG CHỦ</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "SachOnline")">
+                        TRANG CHỦ
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href="#">Giới thiệu</a>
@@ -19,7 +21,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 1 })">
                         Sách theo chủ đề
                     </a>
                     <ul class="dropdown-menu">
@@ -30,7 +32,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 1 })">
                         Sách theo nhà xuất bản
                     </a>
                     <ul class="dropdown-menu">

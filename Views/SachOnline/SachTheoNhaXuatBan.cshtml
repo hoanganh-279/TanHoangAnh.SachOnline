@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<TanHoangAnh.SachOnline.Models.SACH>
+
+@{
+    ViewBag.Title = "Sách theo theo nhà xuất bản";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style type="text/css">
+    .imgbook {
+        transition: all 1s ease-in;
+        width: 400px;
+    }
+
+        .imgbook:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+</style>
+
+@section NhaXuatBanPartial {
+    @Html.Action("NhaXuatBanPartial", "SachOnline")}
+
+@section SachBanNhieuPartial {
+    @Html.Action("SachBanNhieuPartial", "SachOnline")}
+
+@section SliderPartial {
+    @Html.Action("SliderPartial", "SachOnline")}
+
+@section NavPartial {
+    @Html.Action("NavPartial", "SachOnline")}
+
+@section FooterPartial {
+    @Html.Action("FooterPartial", "SachOnline")}
+
+<h2 class="text-center">SÁCH THEO NHÀ XUẤT BẢN</h2>
+<hr>
+<div class="row text-center">
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+                <img src="~/Images/@sach.AnhBia" alt="@sach.TenSach"
+                     class="img-responsive img-rounded imgbook"
+                     style="width: 100%; height: 300px; object-fit: contain; padding: 10px;">
+                <div class="caption">
+                    <h4 style="min-height:70px;">
+                        <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })" style="text-decoration: none; font-weight: bold;">
+                            @sach.TenSach
+                        </a>
+                    </h4>
+                    <p>
+                        <a href="#" class="btn btn-primary" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                            </span> Add to Cart
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

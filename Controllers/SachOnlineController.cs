@@ -63,5 +63,25 @@ namespace TanHoangAnh.SachOnline.Controllers
 
             return PartialView(listSachBanNhieu);
         }
+
+        public ActionResult SachTheoChuDe(int id)
+        {
+            
+            var kq = (from s in db.SACHes where s.MaCD == id select s).ToList();
+            return View(kq);
+        }
+
+        public ActionResult SachTheoNhaXuatBan(int id)
+        {
+
+            var kq = (from s in db.SACHes where s.MaNXB == id select s).ToList();
+            return View(kq);
+        }
+
+        public ActionResult ChiTietSach(int id)
+        {
+            var sach = from s in db.SACHes where s.MaSach == id select s;
+            return View(sach.Single());
+        }
     }
 }

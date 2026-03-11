@@ -8,7 +8,7 @@
     @foreach (var nxb in Model)
     {
         <li class="list-group-item">
-            <a href="@Url.Action("SachTheoNXB", "SachOnline", new { id = nxb.MaNXB })" style="text-decoration:none; display:block; color:#333;">
+            <a href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = nxb.MaNXB })" style="text-decoration:none; display:block; color:#333;">
                 @nxb.TenNXB
             </a>
         </li>
