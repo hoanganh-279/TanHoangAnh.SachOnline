@@ -21,23 +21,23 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 1 })">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         Sách theo chủ đề
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Ngoại ngữ</a></li>
-                        <li><a class="dropdown-item" href="#">Công nghệ thông tin</a></li>
-                        <li><a class="dropdown-item" href="#">Văn học</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 1 })">Ngoại ngữ</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 2 })">Công nghệ thông tin</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 3 })">Văn học</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 1 })">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         Sách theo nhà xuất bản
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Nhà xuất bản Trẻ</a></li>
-                        <li><a class="dropdown-item" href="#">NXB Tổng hợp</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 1 })">Nhà xuất bản Trẻ</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 2 })">NXB Tổng hợp</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,6 +46,14 @@
                 <input class="form-control me-2" type="text" placeholder="Tìm kiếm" aria-label="Search" style="border-radius: 0;">
                 <button class="btn btn-light" type="submit" style="border-radius: 0;">Tìm</button>
             </form>
+
+            <div class="d-flex ms-3 align-items-center">
+                <img src="~/Images/img_user.jpg" alt="User" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-right: 10px; object-fit: cover;">
+
+                <a href="@Url.Action("DangNhap", "User")" class="btn btn-outline-light btn-sm me-2" style="border-radius: 5px;">Đăng nhập</a>
+                <a href="@Url.Action("DangKy", "User")" class="btn btn-warning btn-sm" style="border-radius: 5px; font-weight: bold;">Đăng ký</a>
+            </div>
+            <li><a class="dropdown-item" href="@Url.Action("GioHangPartial", "GioHang", new { id = 1 })"></a></li>
         </div>
     </div>
 </nav>

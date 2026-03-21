@@ -29,7 +29,7 @@ namespace TanHoangAnh.SachOnline.Controllers
         public ActionResult DangKy(FormCollection collection, KHACHHANG kh)
         {
             //Gan cac gia tri nguoi dung nhap du lieu cho cac bien
-            var sTen = collection["Ten"];
+            var sHoTen = collection["HoTen"];
             var sTenDN = collection["TenDN"];
             var sMatKhau = collection["MatKhau"];
             var sMatKhauNhapLai = collection["MatKhauNL"];
@@ -38,7 +38,7 @@ namespace TanHoangAnh.SachOnline.Controllers
             var sDienThoai = collection["DienThoai"];
             var sNgaySinh = String.Format("{0:MM/dd/yyyy}", collection["NgaySinh"]);
 
-            if (String.IsNullOrEmpty(sTen))
+            if (String.IsNullOrEmpty(sHoTen))
             {
                 ViewData["err1"] = "Họ tên không được rỗng";
             }
@@ -73,7 +73,7 @@ namespace TanHoangAnh.SachOnline.Controllers
             else
             {
                 //Gán giá trị cho đối tượng được tạo mới (kh)
-                kh.HoTen = sTen;
+                kh.HoTen = sHoTen;
                 kh.TaiKhoan = sTenDN;
                 kh.MatKhau = sMatKhau;
                 kh.Email = sEmail;
@@ -117,6 +117,9 @@ namespace TanHoangAnh.SachOnline.Controllers
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
+                    Session["TenDN"] = kh.TaiKhoan;
+                    Session["MatKhau"] = kh.MatKhau;
+                    return RedirectToAction("Index", "SachOnline");
                 }
                 else
                 {

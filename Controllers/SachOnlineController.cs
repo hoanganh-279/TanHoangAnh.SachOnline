@@ -66,7 +66,7 @@ namespace TanHoangAnh.SachOnline.Controllers
 
         public ActionResult SachTheoChuDe(int id)
         {
-            
+            ViewBag.TenChuDe = (from cd in db.CHUDEs where cd.MaCD == id select cd.TenChuDe).FirstOrDefault();
             var kq = (from s in db.SACHes where s.MaCD == id select s).ToList();
             return View(kq);
         }
@@ -84,4 +84,5 @@ namespace TanHoangAnh.SachOnline.Controllers
             return View(sach.Single());
         }
     }
+
 }

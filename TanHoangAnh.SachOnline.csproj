@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SachOnlineController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Models\CHUDE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\DONDATHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -209,6 +211,7 @@
     <Content Include="Images\Giohang_2.gif" />
     <Content Include="Images\Gt_Thcb.jpg" />
     <Content Include="Images\Hoccachhoclai.jpg" />
+    <Content Include="Images\img_user.jpg" />
     <Content Include="Images\Kt.jpg" />
     <Content Include="Images\KT0001.jpg" />
     <Content Include="Images\KT0002.jpg" />
@@ -307,6 +310,7 @@
     <Content Include="Views\SachOnline\ChiTietSach.cshtml" />
     <Content Include="Views\User\DangKy.cshtml" />
     <Content Include="Views\User\DangNhap.cshtml" />
+    <Content Include="Views\GioHang\GioHangPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
