@@ -129,5 +129,11 @@ namespace TanHoangAnh.SachOnline.Controllers
 
             return View();
         }
+
+        public ActionResult DangXuat()
+        {
+            Session.Clear(); // Xóa toàn bộ session
+            return RedirectToAction("Index", "SachOnline");
+        }
     }
 }

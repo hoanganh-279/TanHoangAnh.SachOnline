@@ -1,65 +1,9 @@
-﻿@model TanHoangAnh.SachOnline.Models.SACH
-
-@{
-    ViewBag.Title = Model.TenSach;
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+﻿@{
+    Layout = null;
 }
 
-@section NhaXuatBanPartial {
-    @Html.Action("NhaXuatBanPartial", "SachOnline")
-}
-@section NavPartial {
-    @Html.Action("NavPartial", "SachOnline")
-}
-@section FooterPartial {
-    @Html.Action("FooterPartial", "SachOnline")
-}
-
-<div style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 30px; margin-bottom: 20px;">
-
-    <div class="row">
-        <div class="col-md-4 col-sm-5 text-center">
-            <div style="border: 1px solid #eee; padding: 10px; border-radius: 8px;">
-                <img src="~/Images/@Model.AnhBia" alt="@Model.TenSach"
-                     class="img-responsive"
-                     style="width: 100%; height: auto; object-fit: contain; max-height: 400px;" />
-            </div>
-        </div>
-
-        <div class="col-md-8 col-sm-7">
-            <h2 style="margin-top: 0; color: #333; font-weight: bold; line-height: 1.4;">
-                @Model.TenSach
-            </h2>
-            <hr />
-
-            <div style="background-color: #fafafa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                <span style="font-size: 1.2em; color: #555;">Giá bán: </span>
-                <span style="font-size: 1.8em; color: #d9534f; font-weight: bold;">
-                    @Html.FormatValue(Model.GiaBan, "{0:#,##0}") VNĐ
-                </span>
-            </div>
-
-            <p class="text-muted" style="font-size: 0.95em;">
-                <span class="glyphicon glyphicon-calendar"></span>
-                <strong>Ngày cập nhật:</strong> @Html.FormatValue(Model.NgayCapNhat, "{0:dd/MM/yyyy}")
-            </p>
-
-            <div style="margin-top: 25px; margin-bottom: 25px;">
-                <a href="@Url.Action("AddToCart", "ShoppingCart", new { id = Model.MaSach })"
-                   class="btn btn-danger btn-lg"
-                   style="padding: 12px 30px; font-weight: bold; font-size: 1.1em; border-radius: 5px; text-transform: uppercase;">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></span>
-                    Chọn Mua
-                </a>
-            </div>
-
-            <h4 style="font-weight: bold; border-bottom: 2px solid #337ab7; padding-bottom: 10px; display: inline-block;">
-                Nội dung giới thiệu
-            </h4>
-            <div class="mota-sach" style="line-height: 1.8; font-size: 1.05em; text-align: justify; margin-top: 15px; color: #444;">
-                @* Xử lý xuống dòng cho phần mô tả y như hướng dẫn trong Lab *@
-                @Html.Raw(Model.MoTa.ToString().Replace("\n", "</p><p style='text-indent: 20px;'>"))
-            </div>
-        </div>
-    </div>
-</div>
+<a href="@Url.Action("GioHang", "GioHang")"
+   style="color:white; font-weight:bold; text-decoration:none; margin-left: 15px;">
+    <span class="glyphicon glyphicon-shopping-cart"></span>
+    Giỏ hàng (@ViewBag.TongSoLuong)
+</a>

@@ -47,13 +47,46 @@
                 <button class="btn btn-light" type="submit" style="border-radius: 0;">Tìm</button>
             </form>
 
-            <div class="d-flex ms-3 align-items-center">
-                <img src="~/Images/img_user.jpg" alt="User" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-right: 10px; object-fit: cover;">
+            @* Giỏ hàng *@
+            @Html.Action("GioHangPartial", "GioHang")
 
-                <a href="@Url.Action("DangNhap", "User")" class="btn btn-outline-light btn-sm me-2" style="border-radius: 5px;">Đăng nhập</a>
-                <a href="@Url.Action("DangKy", "User")" class="btn btn-warning btn-sm" style="border-radius: 5px; font-weight: bold;">Đăng ký</a>
+            <div class="d-flex ms-3 align-items-center">
+                @if (Session["TaiKhoan"] != null)
+                {
+                    var kh = Session["TaiKhoan"] as TanHoangAnh.SachOnline.Models.KHACHHANG;
+                    string hoTen = kh != null ? kh.HoTen : "";
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle d-flex align-items-center text-decoration-none"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/Images/img_user.jpg" alt="Avatar"
+                                 style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; margin-right: 8px;">
+                            <span class="text-white" style="font-weight: bold;">@hoTen</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="glyphicon glyphicon-user" style="margin-right:6px;"></span>
+                                    Trang cá nhân
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="@Url.Action("DangXuat", "User")">
+                                    <span class="glyphicon glyphicon-log-out" style="margin-right:6px;"></span>
+                                    Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <img src="~/Images/img_user.jpg" alt="User"
+                         style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-right: 10px; object-fit: cover;">
+                    <a href="@Url.Action("DangNhap", "User")" class="btn btn-outline-light btn-sm me-2" style="border-radius: 5px;">Đăng nhập</a>
+                    <a href="@Url.Action("DangKy", "User")" class="btn btn-warning btn-sm" style="border-radius: 5px; font-weight: bold;">Đăng ký</a>
+                }
             </div>
-            <li><a class="dropdown-item" href="@Url.Action("GioHangPartial", "GioHang", new { id = 1 })"></a></li>
         </div>
     </div>
 </nav>
