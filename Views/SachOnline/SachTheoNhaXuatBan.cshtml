@@ -1,10 +1,13 @@
-﻿
-@model IEnumerable<TanHoangAnh.SachOnline.Models.SACH>
+﻿@using PagedList.Mvc;
+@using TanHoangAnh.SachOnline.Models;
+@model PagedList.IPagedList<SACH>
 
 @{
     ViewBag.Title = "Sách theo theo nhà xuất bản";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
+@Styles.Render("~/Content/PagedList.css")
 
 <style type="text/css">
     .imgbook {
@@ -59,4 +62,10 @@
             </div>
         </div>
     }
+</div>
+@*Tạo liên kết các trang*@
+<div class="text-center" style="margin-top: 20px;">
+    <p>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
+    @Html.PagedListPager(Model, page => Url.Action("SachTheoNhaXuatBan", new { id = ViewBag.MaNXB, page = page }),
+    new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } })
 </div>

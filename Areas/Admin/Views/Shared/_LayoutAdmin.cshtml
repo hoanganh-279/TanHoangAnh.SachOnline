@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/js")
+</head>
+<body>
+
+    @* Đổi sang navbar-dark bg-dark của Bootstrap 5 *@
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index","Home", new { area = "Admin" })">SachOnlineAdmin</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAdmin">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navAdmin">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="@Url.Action("Index","Sach")">Quản lý sách</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="@Url.Action("Index","ChuDe")">Quản lý chủ đề</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="@Url.Action("Index","NhaXuatBan")">Quản lý NXB</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="@Url.Action("Index","KhachHang")">Quản lý khách hàng</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="@Url.Action("Index","DonHang")">Quản lý đơn hàng</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="min-height: 400px; padding-top: 20px;">
+        @RenderBody()
+    </div>
+
+    @* Đổi class well của BS3 thành bg-light của BS5 *@
+    <footer class="container bg-light p-3 mt-4" style="border-radius: 5px;">
+        <div style="text-align:center;">
+            <p class="mb-0 text-muted">ADMIN</p>
+        </div>
+    </footer>
+</body>
+</html>
