@@ -1,0 +1,78 @@
+﻿@model TanHoangAnh.SachOnline.Models.NHAXUATBAN
+@{
+    ViewBag.Title = "Thêm Nhà Xuất Bản";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-0 py-3">
+                    <h4 class="mb-0 fw-semibold text-dark">
+                        <i class="bi bi-building me-2 text-primary"></i>Thêm Nhà Xuất Bản Mới
+                    </h4>
+                </div>
+                <div class="card-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    @using (Html.BeginForm("Create", "NhaXuatBan", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Tên Nhà Xuất Bản <span class="text-danger">*</span></label>
+                            @Html.EditorFor(model => model.TenNXB, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "Nhập tên nhà xuất bản...",
+                                    @required = "required",
+                                    autofocus = "autofocus"
+                                }
+                            })
+                            @Html.ValidationMessageFor(model => model.TenNXB, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Địa Chỉ</label>
+                            @Html.EditorFor(model => model.DiaChi, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "Nhập địa chỉ..."
+                                }
+                            })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-medium">Điện Thoại</label>
+                            @Html.EditorFor(model => model.DienThoai, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "Nhập số điện thoại..."
+                                }
+                            })
+                            @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-plus-lg me-1"></i> Thêm mới
+                            </button>
+                            <a href="@Url.Action("Index", "NhaXuatBan")" class="btn btn-light px-4">
+                                <i class="bi bi-arrow-left me-1"></i> Quay lại
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

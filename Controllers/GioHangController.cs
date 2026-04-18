@@ -51,12 +51,8 @@ namespace TanHoangAnh.SachOnline.Controllers
         {
             int iTongSoLuong = 0;
             List<GioHang> lstGioHang = Session["GioHang"] as List<GioHang>;
-
             if (lstGioHang != null)
-            {
                 iTongSoLuong = lstGioHang.Sum(n => n.iSoLuong);
-            }
-
             return iTongSoLuong;
         }
 
@@ -64,31 +60,22 @@ namespace TanHoangAnh.SachOnline.Controllers
         {
             double dTongTien = 0;
             List<GioHang> lstGioHang = Session["GioHang"] as List<GioHang>;
-
             if (lstGioHang != null)
-            {
                 dTongTien = lstGioHang.Sum(n => n.dThanhTien);
-            }
-
             return dTongTien;
         }
 
         public ActionResult GioHang()
         {
             List<GioHang> lstGioHang = LayGioHang();
-
             if (lstGioHang.Count == 0)
-            {
                 return RedirectToAction("Index", "SachOnline");
-            }
 
             ViewBag.TongSoLuong = TongSoLuong();
             ViewBag.TongTien = TongTien();
-
             return View(lstGioHang);
         }
 
-        // 1. Xóa một sản phẩm khỏi giỏ hàng
         public ActionResult XoaGioHang(int iMaSP)
         {
             List<GioHang> lstGioHang = LayGioHang();
@@ -97,27 +84,21 @@ namespace TanHoangAnh.SachOnline.Controllers
             {
                 lstGioHang.RemoveAll(n => n.iMaSach == iMaSP);
                 if (lstGioHang.Count == 0)
-                {
                     return RedirectToAction("Index", "SachOnline");
-                }
             }
             return RedirectToAction("GioHang");
         }
 
-        // 2. Cập nhật số lượng sản phẩm
         [HttpPost]
         public ActionResult CapnhatGiohang(int iMaSP, FormCollection f)
         {
             List<GioHang> lstGioHang = LayGioHang();
             GioHang sp = lstGioHang.SingleOrDefault(n => n.iMaSach == iMaSP);
             if (sp != null)
-            {
                 sp.iSoLuong = int.Parse(f["txtSoLuong"].ToString());
-            }
             return RedirectToAction("GioHang");
         }
 
-        // 3. Xóa toàn bộ giỏ hàng
         public ActionResult XoaTatCaGioHang()
         {
             List<GioHang> lstGioHang = LayGioHang();
@@ -125,33 +106,30 @@ namespace TanHoangAnh.SachOnline.Controllers
             return RedirectToAction("Index", "SachOnline");
         }
 
-        // 4. Chuyển sang trang Đặt Hàng [HttpGet]
+        // Khi nhấn ĐẶT HÀNG: nếu chưa đăng nhập thì chuyển về DangNhap
+        // và truyền url trang giỏ hàng để sau khi đăng nhập quay lại
         [HttpGet]
         public ActionResult DatHang()
         {
             if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
             {
-                return RedirectToAction("DangNhap", "User");
+                // Truyền url trang giỏ hàng để sau khi đăng nhập quay lại
+                return RedirectToAction("DangNhap", "User", new { url = Request.Url.ToString() });
             }
 
             if (Session["GioHang"] == null)
-            {
                 return RedirectToAction("Index", "SachOnline");
-            }
 
             List<GioHang> lstGioHang = LayGioHang();
             ViewBag.TongSoLuong = TongSoLuong();
             ViewBag.TongTien = TongTien();
-
             return View(lstGioHang);
         }
 
-        // 5. Xử lý đặt hàng [HttpPost]
         [HttpPost]
         public ActionResult DatHang(FormCollection f)
         {
             List<GioHang> lstCart = LayGioHang();
-
             DONDATHANG ddh = new DONDATHANG();
             KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
 
@@ -160,7 +138,6 @@ namespace TanHoangAnh.SachOnline.Controllers
             ddh.NgayGiao = !string.IsNullOrEmpty(f["NgayGiao"])
                 ? DateTime.Parse(f["NgayGiao"])
                 : (DateTime?)null;
-
             ddh.TinhTrangGiaoHang = 1;
             ddh.DaThanhToan = false;
             db.DONDATHANGs.Add(ddh);
@@ -181,7 +158,6 @@ namespace TanHoangAnh.SachOnline.Controllers
             return RedirectToAction("XacNhanDonHang", "GioHang");
         }
 
-        // 6. Xác nhận đơn hàng
         public ActionResult XacNhanDonHang()
         {
             return View();

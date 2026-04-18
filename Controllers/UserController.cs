@@ -7,7 +7,6 @@ using TanHoangAnh.SachOnline.Models;
 
 namespace TanHoangAnh.SachOnline.Controllers
 {
-
     public class UserController : Controller
     {
         TanHoangAnh.SachOnline.Models.SachOnlineEntities db = new TanHoangAnh.SachOnline.Models.SachOnlineEntities();
@@ -17,7 +16,7 @@ namespace TanHoangAnh.SachOnline.Controllers
         {
             return View();
         }
-        
+
         // Đăng ký
         [HttpGet]
         public ActionResult DangKy()
@@ -28,7 +27,6 @@ namespace TanHoangAnh.SachOnline.Controllers
         [HttpPost]
         public ActionResult DangKy(FormCollection collection, KHACHHANG kh)
         {
-            //Gan cac gia tri nguoi dung nhap du lieu cho cac bien
             var sHoTen = collection["HoTen"];
             var sTenDN = collection["TenDN"];
             var sMatKhau = collection["MatKhau"];
@@ -39,40 +37,23 @@ namespace TanHoangAnh.SachOnline.Controllers
             var sNgaySinh = String.Format("{0:MM/dd/yyyy}", collection["NgaySinh"]);
 
             if (String.IsNullOrEmpty(sHoTen))
-            {
                 ViewData["err1"] = "Họ tên không được rỗng";
-            }
             else if (String.IsNullOrEmpty(sTenDN))
-            {
                 ViewData["err2"] = "Tên đăng nhập không được rỗng";
-            }
             else if (String.IsNullOrEmpty(sMatKhau))
-            {
                 ViewData["err3"] = "Phải nhập mật khẩu";
-            }
             else if (sMatKhau != sMatKhauNhapLai)
-            {
                 ViewData["err4"] = "Mật khẩu nhập lại không khớp";
-            }
             else if (String.IsNullOrEmpty(sEmail))
-            {
                 ViewData["err5"] = "Email không được rỗng";
-            }
             else if (String.IsNullOrEmpty(sDienThoai))
-            {
                 ViewData["err6"] = "Số điện thoại không được rỗng";
-            }
             else if (db.KHACHHANGs.SingleOrDefault(n => n.TaiKhoan == sTenDN) != null)
-            {
                 ViewBag.ThongBao = "Tên đăng nhập đã tồn tại";
-            }
             else if (db.KHACHHANGs.SingleOrDefault(n => n.Email == sEmail) != null)
-            {
                 ViewBag.ThongBao = "Email đã được sử dụng";
-            }
             else
             {
-                //Gán giá trị cho đối tượng được tạo mới (kh)
                 kh.HoTen = sHoTen;
                 kh.TaiKhoan = sTenDN;
                 kh.MatKhau = sMatKhau;
@@ -88,9 +69,11 @@ namespace TanHoangAnh.SachOnline.Controllers
         }
 
         // Đăng nhập
+        // Nhận thêm tham số url để sau khi đăng nhập quay lại đúng trang
         [HttpGet]
-        public ActionResult DangNhap()
+        public ActionResult DangNhap(string url)
         {
+            ViewBag.url = url; // Lưu url vào ViewBag để truyền vào form
             return View();
         }
 
@@ -99,6 +82,8 @@ namespace TanHoangAnh.SachOnline.Controllers
         {
             var sTenDN = collection["TenDN"];
             var sMatKhau = collection["MatKhau"];
+            // Lấy url được truyền vào từ hidden field trong form
+            var url = collection["url"];
 
             if (String.IsNullOrEmpty(sTenDN))
             {
@@ -115,15 +100,20 @@ namespace TanHoangAnh.SachOnline.Controllers
 
                 if (kh != null)
                 {
-                    ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
                     Session["TenDN"] = kh.TaiKhoan;
                     Session["MatKhau"] = kh.MatKhau;
+
+                    // Nếu có url thì quay lại trang đó, không thì về trang chủ
+                    if (!string.IsNullOrEmpty(url))
+                        return Redirect(url);
+
                     return RedirectToAction("Index", "SachOnline");
                 }
                 else
                 {
                     ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    ViewBag.url = url; // Giữ lại url khi đăng nhập thất bại
                 }
             }
 
@@ -132,7 +122,7 @@ namespace TanHoangAnh.SachOnline.Controllers
 
         public ActionResult DangXuat()
         {
-            Session.Clear(); // Xóa toàn bộ session
+            Session.Clear();
             return RedirectToAction("Index", "SachOnline");
         }
     }

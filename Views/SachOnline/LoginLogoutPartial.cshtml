@@ -1,0 +1,33 @@
+﻿@using TanHoangAnh.SachOnline.Models
+@{
+    KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+}
+
+@* Tùy chọn để hiển thị *@
+@if (Session["TaiKhoan"] == null) // Giao diện Login
+{
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("DangKy", "User")">
+            <span class="glyphicon glyphicon-user"></span> Đăng ký
+        </a>
+    </li>
+    <li class="nav-item">
+        @* Truyền url hiện tại để sau khi đăng nhập quay lại đúng trang *@
+        <a class="nav-link" href="@Url.Action("DangNhap", "User", new { url = Request.Url.ToString() })">
+            <span class="glyphicon glyphicon-log-in"></span> Đăng nhập
+        </a>
+    </li>
+}
+else // Giao diện Logout
+{
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <span class="glyphicon glyphicon-user"></span> Xin chào: @kh.HoTen
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("DangXuat", "User")">
+            <span class="glyphicon glyphicon-log-out"></span> Đăng xuất
+        </a>
+    </li>
+}
