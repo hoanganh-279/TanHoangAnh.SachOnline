@@ -136,15 +136,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-<<<<<<< HEAD
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
     <Compile Include="Areas\Admin\Controllers\DonHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\SachController.cs" />
-=======
->>>>>>> 87a2fa60fc9f34682caf3bc12e871f99b86f3f9b
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SachOnlineController.cs" />
@@ -283,11 +280,6 @@
     <Content Include="Images\desktop.ini" />
     <Content Include="Images\Slider\desktop.ini" />
     <Content Include="libman.json" />
-<<<<<<< HEAD
-=======
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
->>>>>>> 87a2fa60fc9f34682caf3bc12e871f99b86f3f9b
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -313,9 +305,8 @@
     <Content Include="Areas\Admin\Views\Sach\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Sach\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Sach\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -363,7 +354,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -424,12 +414,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
