@@ -1,6 +1,7 @@
 {
   "version": "3.0",
   "defaultProvider": "cdnjs",
+<<<<<<< HEAD
   "libraries": [
     {
       "libraryName": "bootstrap",
@@ -23,4 +24,7 @@
       "destination": "wwwroot/lib/jquery-validation-unobtrusive"
     }
   ]
+=======
+  "libraries": []
+>>>>>>> 87a2fa60fc9f34682caf3bc12e871f99b86f3f9b
 }

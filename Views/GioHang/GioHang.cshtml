@@ -1,5 +1,4 @@
-﻿
-@model List<TanHoangAnh.SachOnline.Models.GioHang>
+﻿@model List<TanHoangAnh.SachOnline.Models.GioHang>
 @{
     ViewBag.Title = "GioHang";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -12,55 +11,72 @@
     @Html.Action("FooterPartial", "SachOnline")
 }
 
-<h2 style="text-align:center;">THÔNG TIN GIỎ HÀNG</h2>
-<table border="1">
-    <tr style="background-color:#9ca1a4; font-size:15px; font-weight:bold; text-align:center;">
-        <td>Mã Sách</td>
-        <td>Tên Sách</td>
-        <td>Ảnh Bìa</td>
-        <td>Số Lượng</td>
-        <td>Đơn Giá</td>
-        <td>Thành Tiền</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td align="center">@item.iMaSach</td>
-        <td>@item.sTenSach</td>
-        <td><img src="~/Images/@item.sAnhBia" style="width:100px;"></td>
-        @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { iMaSach = item.iMaSach }))
-            {
-        <td align="center">
-            <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong"
-                   style="background-color:#f4ff94" />
-        </td>
-        <td align="center">@string.Format("{0:#,##0,0}", item.dDonGia)</td>
-        <td align="center">@string.Format("{0:#,##0,0}", item.dThanhTien)</td>
-        <td><a href="@Url.Action("ChiTietSach","SachOnline", new { id = item.iMaSach })">Chi tiết</a></td>
-        <td>@Html.ActionLink("Xóa", "XoaGioHang", new { iMaSach = item.iMaSach })</td>
-        <td><input type="submit" value="Cập nhật" /></td>
-            }
-    </tr>
-    }
-    <tr>
-        <td colspan="4" style="text-align:right; color:red; font-weight:bold; padding-right:5px;">
-            Tổng số lượng: @string.Format("{0:#,##0}", ViewBag.TongSoLuong)
-        </td>
-        <td colspan="5" style="text-align:center; color:red; font-weight:bold;">
-            Tổng tiền: @string.Format("{0:#,##0,0}", ViewBag.TongTien) VNĐ
-        </td>
-    </tr>
-    <tr style="font-weight:bold; color:blue; text-align:right;">
-        <td colspan="9">
-            @Html.ActionLink("Xóa giỏ hàng", "XoaTatCaGioHang", "GioHang")
-        </td>
-    </tr>
-    <tr style="font-weight:bold; color:blue; text-align:center;">
-        <td colspan="9">
-            @Html.ActionLink("ĐẶT HÀNG", "DatHang", "GioHang")
-        </td>
-    </tr>
-</table>
+<div class="container mt-4 mb-5">
+    <h2 class="text-center text-uppercase fw-bold text-primary mb-4">Thông Tin Giỏ Hàng</h2>
+
+    <div class="table-responsive shadow-sm">
+        <table class="table table-bordered table-hover align-middle text-center mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã Sách</th>
+                    <th>Tên Sách</th>
+                    <th>Ảnh Bìa</th>
+                    <th width="150px">Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Thành Tiền</th>
+                    <th colspan="3">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.iMaSach</strong></td>
+                        <td class="text-start">@item.sTenSach</td>
+                        <td>
+                            <img src="~/Images/@item.sAnhBia" alt="@item.sTenSach" class="img-thumbnail" style="width: 80px; height: auto;" />
+                        </td>
+
+                        @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { iMaSach = item.iMaSach }))
+                        {
+                            <td>
+                                <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong" class="form-control text-center mx-auto" style="width: 80px;" />
+                            </td>
+                            <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
+                            <td class="text-danger fw-bold">@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
+
+                            <td>
+                                <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = item.iMaSach })" class="btn btn-sm btn-info text-white" title="Chi tiết">
+                                    Chi tiết
+                                </a>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xóa", "XoaGioHang", new { iMaSach = item.iMaSach }, new { @class = "btn btn-sm btn-danger" })
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-success">Cập nhật</button>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="table-light">
+                <tr>
+                    <td colspan="5" class="text-end fw-bold fs-5">Tổng số lượng:</td>
+                    <td class="text-danger fw-bold fs-5">@string.Format("{0:#,##0}", ViewBag.TongSoLuong)</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-end fw-bold fs-5">Tổng tiền:</td>
+                    <td class="text-danger fw-bold fs-5">@string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</td>
+                    <td colspan="3"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        @Html.ActionLink("Xóa toàn bộ giỏ hàng", "XoaTatCaGioHang", "GioHang", null, new { @class = "btn btn-outline-danger" })
+        @Html.ActionLink("TIẾN HÀNH ĐẶT HÀNG", "DatHang", "GioHang", null, new { @class = "btn btn-primary btn-lg fw-bold px-5 shadow" })
+    </div>
+</div>
