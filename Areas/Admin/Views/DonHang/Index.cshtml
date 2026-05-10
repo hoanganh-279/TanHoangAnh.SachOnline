@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TanHoangAnh.SachOnline.Models.DONDATHANG>
+@model IEnumerable<TanHoangAnh.SachOnline.Models.DONDATHANG>
 @{
     ViewBag.Title = "Quản lý Đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,11 +27,11 @@
             <td>
                 @if (item.TinhTrangGiaoHang == 1)
                 {
-                    <span class="label label-success">Đã giao hàng</span>
+                    <span class="badge bg-success">Đã giao hàng</span>
                 }
                 else
                 {
-                    <span class="label label-warning">Chưa giao hàng</span>
+                    <span class="badge bg-warning text-dark">Chưa giao hàng</span>
                 }
             </td>
             <td>

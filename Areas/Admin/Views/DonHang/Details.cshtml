@@ -1,4 +1,4 @@
-﻿@model TanHoangAnh.SachOnline.Models.DONDATHANG
+@model TanHoangAnh.SachOnline.Models.DONDATHANG
 @{
     ViewBag.Title = "Chi tiết đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -37,8 +37,8 @@
     {
         foreach (var item in chiTiet)
         {
-            var thanhTien = item.SoLuong * item.DonGia;
-            tongTien += (decimal)thanhTien;
+            var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+            tongTien += thanhTien;
             <tr>
                 <td>@(item.SACH != null ? item.SACH.TenSach : "Sách không tồn tại")</td>
                 <td>@item.SoLuong</td>

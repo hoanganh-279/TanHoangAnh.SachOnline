@@ -12,6 +12,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         // DANH SÁCH NXB (có tìm kiếm + phân trang, mỗi trang 15)
         public ActionResult Index(int? page, string tuKhoa)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             int pageSize = 15;
             int pageNumber = (page ?? 1);
 
@@ -31,6 +32,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             return View();
         }
 
@@ -38,6 +40,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(NHAXUATBAN nxb)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             if (ModelState.IsValid)
             {
                 db.NHAXUATBANs.Add(nxb);
@@ -51,6 +54,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             var nxb = db.NHAXUATBANs.SingleOrDefault(n => n.MaNXB == id);
             if (nxb == null) return HttpNotFound();
             return View(nxb);
@@ -60,6 +64,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(NHAXUATBAN nxb)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             if (ModelState.IsValid)
             {
                 var nxbUpdate = db.NHAXUATBANs.SingleOrDefault(n => n.MaNXB == nxb.MaNXB);
@@ -79,6 +84,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             var nxb = db.NHAXUATBANs.SingleOrDefault(n => n.MaNXB == id);
             if (nxb == null) return HttpNotFound();
             return View(nxb);
@@ -88,6 +94,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(int id)
         {
+            ViewBag.ActiveMenu = "NhaXuatBan";
             var nxb = db.NHAXUATBANs.SingleOrDefault(n => n.MaNXB == id);
             if (nxb != null)
             {

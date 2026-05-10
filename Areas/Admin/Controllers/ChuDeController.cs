@@ -11,6 +11,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
 
         public ActionResult Index(int? page, string tuKhoa)
         {
+            ViewBag.ActiveMenu = "ChuDe";
             int pageSize = 15;
             int pageNumber = (page ?? 1);
 
@@ -29,12 +30,14 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.ActiveMenu = "ChuDe";
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(CHUDE chude)
         {
+            ViewBag.ActiveMenu = "ChuDe";
             if (ModelState.IsValid)
             {
                 db.CHUDEs.Add(chude);
@@ -47,6 +50,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.ActiveMenu = "ChuDe";
             var cd = db.CHUDEs.SingleOrDefault(c => c.MaCD == id);
             if (cd == null) return HttpNotFound();
             return View(cd);
@@ -55,6 +59,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(CHUDE chude)
         {
+            ViewBag.ActiveMenu = "ChuDe";
             if (ModelState.IsValid)
             {
                 var cdUpdate = db.CHUDEs.SingleOrDefault(c => c.MaCD == chude.MaCD);

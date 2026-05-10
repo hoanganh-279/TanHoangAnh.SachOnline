@@ -1,6 +1,5 @@
 using TanHoangAnh.SachOnline.Models;
 using PagedList;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -13,6 +12,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         // DANH SÁCH KHÁCH HÀNG
         public ActionResult Index(int? page, string tuKhoa)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
@@ -32,6 +32,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.ActiveMenu = "KhachHang";
             return View();
         }
 
@@ -39,6 +40,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(KHACHHANG kh)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             if (ModelState.IsValid)
             {
                 var checkTK = db.KHACHHANGs.FirstOrDefault(k => k.TaiKhoan == kh.TaiKhoan);
@@ -59,6 +61,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             var kh = db.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
             if (kh == null) return HttpNotFound();
             return View(kh);
@@ -68,6 +71,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(KHACHHANG kh)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             if (ModelState.IsValid)
             {
                 var khUpdate = db.KHACHHANGs.SingleOrDefault(n => n.MaKH == kh.MaKH);
@@ -95,6 +99,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             var kh = db.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
             if (kh == null) return HttpNotFound();
             return View(kh);
@@ -104,6 +109,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(int id)
         {
+            ViewBag.ActiveMenu = "KhachHang";
             var kh = db.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
             if (kh != null)
             {

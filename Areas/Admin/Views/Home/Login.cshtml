@@ -332,6 +332,7 @@
 
             <!-- Login form -->
             <form action="@Url.Action("Login", "Home", new { area = "Admin" })" method="post" autocomplete="off">
+                @Html.AntiForgeryToken()
 
                 <!-- Username -->
                 <div class="field-group">
@@ -375,6 +376,7 @@
     </div>
 
     <script>
+        // @@ts-nocheck
         function togglePw() {
             var pw = document.getElementById('Password');
             var icon = document.getElementById('eyeIcon');

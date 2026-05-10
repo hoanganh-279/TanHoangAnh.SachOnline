@@ -10,16 +10,24 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.ActiveMenu = "DonHang";
             var listDH = db.DONDATHANGs.OrderByDescending(d => d.NgayDat).ToList();
             return View(listDH);
         }
 
         public ActionResult Details(int id)
         {
-            var dh = db.DONDATHANGs.SingleOrDefault(d => d.MaDonHang == id);
+            ViewBag.ActiveMenu = "DonHang";
+            var dh = db.DONDATHANGs
+                .Include("KHACHHANG")
+                .SingleOrDefault(d => d.MaDonHang == id);
             if (dh == null) return HttpNotFound();
 
-            var chiTiet = db.CHITIETDATHANGs.Where(c => c.MaDonHang == id).ToList();
+            // Include SACH để hiển thị tên sách đúng trong View
+            var chiTiet = db.CHITIETDATHANGs
+                .Include("SACH")
+                .Where(c => c.MaDonHang == id)
+                .ToList();
             ViewBag.ChiTiet = chiTiet;
 
             return View(dh);
@@ -28,6 +36,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.ActiveMenu = "DonHang";
             var dh = db.DONDATHANGs.SingleOrDefault(d => d.MaDonHang == id);
             if (dh == null) return HttpNotFound();
             return View(dh);
@@ -36,6 +45,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(DONDATHANG dh)
         {
+            ViewBag.ActiveMenu = "DonHang";
             var dhUpdate = db.DONDATHANGs.SingleOrDefault(d => d.MaDonHang == dh.MaDonHang);
             if (dhUpdate != null)
             {

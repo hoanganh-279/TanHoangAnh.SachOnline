@@ -15,6 +15,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         // DANH SÁCH SÁCH
         public ActionResult Index(int? page, string tuKhoa)
         {
+            ViewBag.ActiveMenu = "Sach";
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
@@ -34,6 +35,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.ActiveMenu = "Sach";
             ViewBag.MaCD = new SelectList(db.CHUDEs.ToList(), "MaCD", "TenChuDe");
             ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList(), "MaNXB", "TenNXB");
             return View();
@@ -44,6 +46,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Create(SACH sach, HttpPostedFileBase fFileUpload)
         {
+            ViewBag.ActiveMenu = "Sach";
             ViewBag.MaCD = new SelectList(db.CHUDEs.ToList(), "MaCD", "TenChuDe");
             ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList(), "MaNXB", "TenNXB");
 
@@ -89,6 +92,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.ActiveMenu = "Sach";
             var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
             if (sach == null) return HttpNotFound();
 
@@ -102,6 +106,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(SACH sach, HttpPostedFileBase fFileUpload)
         {
+            ViewBag.ActiveMenu = "Sach";
             if (ModelState.IsValid)
             {
                 var sachUpdate = db.SACHes.SingleOrDefault(n => n.MaSach == sach.MaSach);
@@ -138,6 +143,7 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
+            ViewBag.ActiveMenu = "Sach";
             var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
             if (sach == null)
             {
@@ -150,14 +156,24 @@ namespace TanHoangAnh.SachOnline.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(int id)
         {
+            ViewBag.ActiveMenu = "Sach";
             var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
             if (sach == null)
             {
                 return HttpNotFound();
             }
 
-            db.SACHes.Remove(sach);
-            db.SaveChanges();
+            try
+            {
+                db.SACHes.Remove(sach);
+                db.SaveChanges();
+            }
+            catch
+            {
+                ViewBag.ThongBao = "Không thể xóa sách này vì đã có đơn đặt hàng liên quan trong hệ thống!";
+                return View(sach);
+            }
+
             return RedirectToAction("Index");
         }
     }

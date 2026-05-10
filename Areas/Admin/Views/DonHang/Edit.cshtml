@@ -1,4 +1,4 @@
-﻿@model TanHoangAnh.SachOnline.Models.DONDATHANG
+@model TanHoangAnh.SachOnline.Models.DONDATHANG
 
 @{
     ViewBag.Title = "Cập nhật Đơn hàng";
@@ -42,7 +42,7 @@
 
                         <div class="mb-4">
                             <label class="form-label fw-bold"><i class="bi bi-calendar-event"></i> Ngày giao dự kiến/thực tế</label>
-                            <input type="date" name="Ngaygiao" class="form-control form-control-lg"
+                            <input type="date" name="NgayGiao" class="form-control form-control-lg"
                                    value="@(Model.NgayGiao.HasValue ? Model.NgayGiao.Value.ToString("yyyy-MM-dd") : "")" />
                             <small class="text-muted">Lưu ý: Kiểm tra kỹ ngày trước khi lưu.</small>
                         </div>
