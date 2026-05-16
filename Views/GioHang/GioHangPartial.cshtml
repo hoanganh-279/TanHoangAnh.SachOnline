@@ -1,10 +1,9 @@
 ﻿@{
     Layout = null;
 }
-
-<li>
-    <a href="@Url.Action("GioHang", "GioHang")">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
-        Giỏ hàng (@ViewBag.TongSoLuong)
+<li class="nav-item">
+    <a class="nav-link" href="@Url.Action("GioHang", "GioHang")">
+        <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+        <span class="badge rounded-pill badge-cart">@ViewBag.TongSoLuong</span>
     </a>
 </li>

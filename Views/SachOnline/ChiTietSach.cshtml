@@ -1,4 +1,4 @@
-﻿@model TanHoangAnh.SachOnline.Models.SACH
+@model TanHoangAnh.SachOnline.Models.SACH
 
 @{
     ViewBag.Title = Model.TenSach;
@@ -57,7 +57,7 @@
                 Nội dung giới thiệu
             </h4>
             <div class="mota-sach" style="line-height: 1.8; font-size: 1.05em; text-align: justify; margin-top: 15px; color: #444;">
-                @* Xử lý xuống dòng cho phần mô tả y như hướng dẫn trong Lab *@
+                @* Xử lý xuống dòng cho phần mô tả đúng như hướng dẫn trong Lab *@
                 @Html.Raw(Model.MoTa.ToString().Replace("\n", "</p><p style='text-indent: 20px;'>"))
             </div>
         </div>

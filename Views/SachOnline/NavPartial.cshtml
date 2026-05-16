@@ -1,26 +1,33 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-radius: 0;">
+﻿<div class="so-topbar d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-envelope me-1"></i> contact@sachonline.vn</span>
+        <span><i class="bi bi-telephone me-1"></i> Hotline: <a href="tel:19001234">1900 1234</a> — Miễn phí vận chuyển đơn từ 300.000đ</span>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark so-navbar sticky-top">
     <div class="container">
-        @Html.ActionLink("SachOnline", "Index", "SachOnline", new { area = "" }, new { @class = "navbar-brand" })
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+        <a class="navbar-brand" href="@Url.Action("Index", "SachOnline")">Sach<span>Online</span></a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="mainMenu">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @{
+                    var activeMenu = ViewBag.ActiveMenu as string ?? "";
+                }
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "SachOnline")">TRANG CHỦ</a>
+                    <a class="nav-link @(activeMenu == "Index" ? "active" : "")" href="@Url.Action("Index", "SachOnline")">
+                        <i class="bi bi-house-door me-1"></i> Trang chủ
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Giới thiệu</a>
+                    <a class="nav-link @(activeMenu == "GioiThieu" ? "active" : "")" href="@Url.Action("GioiThieu", "SachOnline")">Giới thiệu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Liên hệ</a>
+                    <a class="nav-link @(activeMenu == "LienHe" ? "active" : "")" href="@Url.Action("LienHe", "SachOnline")">Liên hệ</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        Sách theo chủ đề
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chủ đề</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 1 })">Ngoại ngữ</a></li>
                         <li><a class="dropdown-item" href="@Url.Action("SachTheoChuDe", "SachOnline", new { id = 2 })">Công nghệ thông tin</a></li>
@@ -28,24 +35,18 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        Sách theo nhà xuất bản
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nhà xuất bản</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 1 })">Nhà xuất bản Trẻ</a></li>
                         <li><a class="dropdown-item" href="@Url.Action("SachTheoNhaXuatBan", "SachOnline", new { id = 2 })">NXB Tổng hợp</a></li>
                     </ul>
                 </li>
             </ul>
-
-            @* Form tìm kiếm *@
-            <form class="d-flex me-2">
-                <input class="form-control me-2" type="text" placeholder="Tìm kiếm" name="data" style="border-radius: 0;">
-                <button class="btn btn-light" type="submit" style="border-radius: 0;">Tìm</button>
+            <form class="d-flex so-search me-lg-3 mb-2 mb-lg-0" role="search">
+                <input class="form-control" type="search" placeholder="Tìm sách, tác giả..." name="data" aria-label="Tìm kiếm" />
+                <button class="btn btn-search" type="submit"><i class="bi bi-search"></i></button>
             </form>
-
-            @* Đăng ký / Đăng nhập / Đăng xuất - dùng partial theo lab *@
-            <ul class="navbar-nav align-items-center">
+            <ul class="navbar-nav so-nav-cart align-items-lg-center">
                 @Html.Action("LoginLogout", "SachOnline")
                 @Html.Action("GioHangPartial", "GioHang")
             </ul>

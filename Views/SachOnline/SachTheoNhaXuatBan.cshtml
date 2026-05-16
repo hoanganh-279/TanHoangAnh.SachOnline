@@ -1,9 +1,9 @@
-﻿@using PagedList.Mvc;
+@using PagedList.Mvc;
 @using TanHoangAnh.SachOnline.Models;
 @model PagedList.IPagedList<SACH>
 
 @{
-    ViewBag.Title = "Sách theo theo nhà xuất bản";
+    ViewBag.Title = "Sách theo nhà xuất bản";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
@@ -36,7 +36,7 @@
 @section FooterPartial {
     @Html.Action("FooterPartial", "SachOnline")}
 
-<h2 class="text-center">SÁCH THEO NHÀ XUẤT BẢN</h2>
+<h2 class="text-center">SÁCH THEO NHÀ XUẤT BẢN: @ViewBag.TenNXB</h2>
 <hr>
 <div class="row text-center">
     @foreach (var sach in Model)
@@ -63,9 +63,10 @@
         </div>
     }
 </div>
+
 @*Tạo liên kết các trang*@
 <div class="text-center" style="margin-top: 20px;">
     <p>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
     @Html.PagedListPager(Model, page => Url.Action("SachTheoNhaXuatBan", new { id = ViewBag.MaNXB, page = page }),
-    new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } })
+     new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } })
 </div>

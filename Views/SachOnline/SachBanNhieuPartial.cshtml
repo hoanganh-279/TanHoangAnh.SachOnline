@@ -1,33 +1,29 @@
 ﻿@model IEnumerable<TanHoangAnh.SachOnline.Models.SACH>
-
-<h3 class="text-center" style="margin-top: 30px;">SÁCH BÁN NHIỀU</h3>
-<hr>
-
-<div class="row">
-    @foreach (var sach in Model)
-    {
-        <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
-            <div class="d-flex align-items-center border p-2 shadow-sm rounded" style="background-color: #fff;">
-
-                <img src="~/Images/@sach.AnhBia" alt="@sach.TenSach" class="mr-3"
-                     style="width: 80px; height: 110px; object-fit: contain; margin-right: 15px;">
-
-                <div>
-                    <h6 style="margin-bottom: 5px; font-weight: bold; line-height: 1.4;">
-                        <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })"
-                           style="text-decoration: none; color: #0056b3;">
-                            @sach.TenSach
-                        </a>
-                    </h6>
-                    <p style="margin: 0; font-size: 13px; color: #555;">
-                        Đã bán: <span style="color: red; font-weight: bold;">@sach.SoLuongBan</span> cuốn
-                    </p>
-                    <p style="margin: 0; font-size: 13px; color: #28a745; font-weight: bold;">
-                        Giá: @String.Format("{0:0,0}", sach.GiaBan) VNĐ
-                    </p>
-                </div>
-
-            </div>
+@{ var rank = 0; }
+<section class="so-section" id="bestseller">
+    <header class="so-section-header">
+        <div>
+            <h2>Sách bán chạy</h2>
+            <p class="subtitle">Top sách được khách hàng yêu thích nhất</p>
         </div>
-    }
-</div>
+    </header>
+    <div class="row g-3 so-bestseller-grid">
+        @foreach (var sach in Model)
+        {
+            rank++;
+            <div class="col-md-6">
+                <article class="so-bestseller-item">
+                    <span class="so-bestseller-rank">@rank</span>
+                    <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })">
+                        <img src="~/Images/@sach.AnhBia" alt="@sach.TenSach" />
+                    </a>
+                    <div class="so-bestseller-info">
+                        <h6><a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })">@sach.TenSach</a></h6>
+                        <p class="price">@String.Format("{0:#,##0}", sach.GiaBan) ₫</p>
+                        <p class="sold">Đã bán: <strong>@sach.SoLuongBan</strong> cuốn</p>
+                    </div>
+                </article>
+            </div>
+        }
+    </div>
+</section>

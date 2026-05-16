@@ -1,0 +1,120 @@
+@{
+    ViewBag.Title = "Giới thiệu";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section NhaXuatBanPartial {
+    @Html.Action("NhaXuatBanPartial", "SachOnline")
+}
+
+@section NavPartial {
+    @Html.Action("NavPartial", "SachOnline", new { activeMenu = "GioiThieu" })
+}
+
+@section FooterPartial {
+    @Html.Action("FooterPartial", "SachOnline")
+}
+
+<div class="so-page-banner">
+    <div class="so-page-banner-inner">
+        <h1>Giới thiệu SachOnline</h1>
+        <p>Nhà sách trực tuyến — Kết nối tri thức đến mọi độc giả</p>
+    </div>
+</div>
+
+<section class="so-static-card">
+    <header class="so-section-header">
+        <div>
+            <h2>Về chúng tôi</h2>
+            <p class="subtitle">Uy tín — Chất lượng — Phục vụ tận tâm</p>
+        </div>
+    </header>
+
+    <p class="so-lead">
+        <strong>SachOnline</strong> là website bán sách trực tuyến được xây dựng trong khuôn khổ môn
+        <em>Lập trình Web</em>, hướng tới trải nghiệm mua sách gần gũi, dễ sử dụng và an toàn.
+        Chúng tôi tập trung vào sách giáo dục, ngoại ngữ, công nghệ thông tin và văn học —
+        với nguồn hàng chính hãng từ các nhà xuất bản uy tín trong nước.
+    </p>
+
+    <div class="row g-4 so-about-stats">
+        <div class="col-md-4">
+            <div class="so-stat-box">
+                <i class="bi bi-book"></i>
+                <strong>@ViewBag.TongSach</strong>
+                <span>Đầu sách</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="so-stat-box">
+                <i class="bi bi-tags"></i>
+                <strong>@ViewBag.TongChuDe</strong>
+                <span>Chủ đề</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="so-stat-box">
+                <i class="bi bi-building"></i>
+                <strong>@ViewBag.TongNXB</strong>
+                <span>Nhà xuất bản</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="so-static-card">
+    <header class="so-section-header">
+        <div>
+            <h2>Sứ mệnh &amp; giá trị</h2>
+            <p class="subtitle">Cam kết với độc giả và cộng đồng yêu sách</p>
+        </div>
+    </header>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="so-value-item">
+                <i class="bi bi-shield-check"></i>
+                <div>
+                    <h3>Sách chính hãng 100%</h3>
+                    <p>Nguồn gốc rõ ràng, tem nhãn đầy đủ, đảm bảo quyền lợi người mua.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="so-value-item">
+                <i class="bi bi-truck"></i>
+                <div>
+                    <h3>Giao hàng toàn quốc</h3>
+                    <p>Miễn phí vận chuyển cho đơn hàng từ 300.000đ, giao nhanh trong 2–5 ngày.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="so-value-item">
+                <i class="bi bi-arrow-repeat"></i>
+                <div>
+                    <h3>Đổi trả trong 7 ngày</h3>
+                    <p>Sách lỗi hoặc không đúng mô tả được hỗ trợ đổi trả theo chính sách cửa hàng.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="so-value-item">
+                <i class="bi bi-headset"></i>
+                <div>
+                    <h3>Hỗ trợ 24/7</h3>
+                    <p>Hotline <a href="tel:19001234">1900 1234</a> và email <a href="mailto:contact@sachonline.vn">contact@sachonline.vn</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="so-static-card so-static-card-muted">
+    <h2 class="h5 mb-3"><i class="bi bi-geo-alt me-2"></i> Văn phòng</h2>
+    <p class="mb-2">123 Đường Sách, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
+    <p class="mb-0 text-muted" style="font-size: 0.9rem;">
+        Giờ làm việc: 8:00 – 22:00 (Thứ 2 – Chủ nhật) ·
+        <a href="@Url.Action("LienHe", "SachOnline")">Liên hệ với chúng tôi →</a>
+    </p>
+</section>

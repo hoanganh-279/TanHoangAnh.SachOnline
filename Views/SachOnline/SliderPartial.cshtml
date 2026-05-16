@@ -1,3 +1,39 @@
-﻿<div class="container">
-    <img src="~/Images/Slider/01.jpg" class="img-responsive" style="width:100%">
-</div>
+﻿<section class="so-hero carousel slide" id="heroCarousel" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Images/Slider/01.jpg" class="d-block w-100" alt="Khuyến mãi sách mới" />
+            <div class="carousel-caption">
+                <h2>Khám phá thế giới qua từng trang sách</h2>
+                <p>Hàng ngàn đầu sách mới — Ưu đãi lên đến 30% cho đơn hàng đầu tiên</p>
+                <a href="@Url.Action("Index", "SachOnline")" class="btn btn-hero">Mua sắm ngay</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%);">
+            <div class="carousel-caption">
+                <h2>Sách bán chạy — Cập nhật mỗi tuần</h2>
+                <p>Top sách được độc giả tin tưởng nhất tại SachOnline</p>
+                <a href="@Url.Action("Index", "SachOnline")#bestseller" class="btn btn-hero">Xem sách hot</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background: linear-gradient(135deg, #152a45 0%, #c45c26 100%);">
+            <div class="carousel-caption">
+                <h2>Miễn phí giao hàng toàn quốc</h2>
+                <p>Đơn hàng từ 300.000đ — Giao nhanh trong 2–5 ngày</p>
+                <a href="@Url.Action("Index", "SachOnline")" class="btn btn-hero">Đặt sách ngay</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Trước</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Sau</span>
+    </button>
+</section>

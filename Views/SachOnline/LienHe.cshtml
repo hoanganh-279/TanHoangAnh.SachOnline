@@ -1,0 +1,137 @@
+@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section NhaXuatBanPartial {
+    @Html.Action("NhaXuatBanPartial", "SachOnline")
+}
+
+@section NavPartial {
+    @Html.Action("NavPartial", "SachOnline", new { activeMenu = "LienHe" })
+}
+
+@section FooterPartial {
+    @Html.Action("FooterPartial", "SachOnline")
+}
+
+<div class="so-page-banner">
+    <div class="so-page-banner-inner">
+        <h1>Liên hệ</h1>
+        <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn</p>
+    </div>
+</div>
+
+@if (ViewBag.ThanhCong == true)
+{
+    <div class="alert alert-success so-alert" role="alert">
+        <i class="bi bi-check-circle me-2"></i>
+        Cảm ơn <strong>@ViewBag.HoTen</strong>! Chúng tôi đã nhận tin nhắn và sẽ phản hồi trong thời gian sớm nhất.
+    </div>
+}
+else if (ViewBag.Loi != null)
+{
+    <div class="alert alert-danger so-alert" role="alert">
+        <i class="bi bi-exclamation-circle me-2"></i> @ViewBag.Loi
+    </div>
+}
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <section class="so-static-card h-100">
+            <header class="so-section-header">
+                <div>
+                    <h2>Thông tin liên hệ</h2>
+                    <p class="subtitle">Liên hệ trực tiếp với SachOnline</p>
+                </div>
+            </header>
+
+            <ul class="so-contact-list">
+                <li>
+                    <i class="bi bi-geo-alt"></i>
+                    <div>
+                        <strong>Địa chỉ</strong>
+                        <span>123 Lê Hồng Phong, Phường Phú Hòa, TP. Hồ Chí Minh</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="bi bi-telephone"></i>
+                    <div>
+                        <strong>Hotline</strong>
+                        <span><a href="tel:19001234">1900 1234</a> (miễn phí)</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="bi bi-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <span><a href="mailto:contact@sachonline.vn">tanhoanganh2006a@gmail.com</a></span>
+                    </div>
+                </li>
+                <li>
+                    <i class="bi bi-clock"></i>
+                    <div>
+                        <strong>Giờ làm việc</strong>
+                        <span>8:00 – 22:00 (Thứ 2 – Chủ nhật)</span>
+                    </div>
+                </li>
+            </ul>
+
+            <p class="text-muted mb-0" style="font-size: 0.875rem;">
+                <a href="@Url.Action("GioiThieu", "SachOnline")">← Xem thêm về SachOnline</a>
+            </p>
+        </section>
+    </div>
+
+    <div class="col-lg-7">
+        <section class="so-static-card">
+            <header class="so-section-header">
+                <div>
+                    <h2>Gửi tin nhắn</h2>
+                    <p class="subtitle">Điền form bên dưới, chúng tôi sẽ phản hồi qua email</p>
+                </div>
+            </header>
+
+            @using (Html.BeginForm("LienHe", "SachOnline", FormMethod.Post, new { @class = "so-contact-form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="HoTen" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="HoTen" name="HoTen" placeholder="Nguyễn Văn A" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="email@example.com" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="DienThoai" class="form-label">Điện thoại</label>
+                        <input type="tel" class="form-control" id="DienThoai" name="DienThoai" placeholder="0901234567" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ChuDe" class="form-label">Chủ đề</label>
+                    <select class="form-select" id="ChuDe" name="ChuDe">
+                        <option value="">— Chọn chủ đề —</option>
+                        <option value="dat-hang">Đặt hàng / Giao hàng</option>
+                        <option value="doi-tra">Đổi trả sản phẩm</option>
+                        <option value="gop-y">Góp ý website</option>
+                        <option value="khac">Khác</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="NoiDung" class="form-label">Nội dung <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="NoiDung" name="NoiDung" rows="5" placeholder="Nhập nội dung cần hỗ trợ..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-so-primary">
+                    <i class="bi bi-send me-2"></i> Gửi liên hệ
+                </button>
+            }
+        </section>
+    </div>
+</div>

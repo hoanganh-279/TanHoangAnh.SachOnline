@@ -146,6 +146,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SachOnlineController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +216,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\sachonline-home.css" />
     <Content Include="Images\100X125.gif" />
     <Content Include="Images\130318.jpg" />
     <Content Include="Images\130499.jpg" />
@@ -342,6 +344,8 @@
     <Content Include="Views\SachOnline\SachTheoChuDe.cshtml" />
     <Content Include="Views\SachOnline\SachTheoNhaXuatBan.cshtml" />
     <Content Include="Views\SachOnline\ChiTietSach.cshtml" />
+    <Content Include="Views\SachOnline\GioiThieu.cshtml" />
+    <Content Include="Views\SachOnline\LienHe.cshtml" />
     <Content Include="Views\User\DangKy.cshtml" />
     <Content Include="Views\User\DangNhap.cshtml" />
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
