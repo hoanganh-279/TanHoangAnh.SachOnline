@@ -14,6 +14,13 @@ namespace TanHoangAnh.SachOnline
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "TimKiem",
+                url: "SachOnline/TimKiem",
+                defaults: new { controller = "SachOnline", action = "TimKiem" },
+                namespaces: new[] { "TanHoangAnh.SachOnline.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "SachOnline", action = "Index", id = UrlParameter.Optional },

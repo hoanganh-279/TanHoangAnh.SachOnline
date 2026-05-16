@@ -3,6 +3,7 @@ using PagedList;
 using PagedList.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,12 +52,27 @@ namespace TanHoangAnh.SachOnline.Controllers
             return db.SACHes.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
         }
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, string data = null)
         {
+            if (!string.IsNullOrWhiteSpace(data))
+                return TimKiem(data, page);
+
             ViewBag.ActiveMenu = "Index";
             int size = 6;
             var listSachMoi = db.SACHes.OrderByDescending(a => a.NgayCapNhat).ToList();
             return View(listSachMoi.ToPagedList(page, size));
+        }
+
+        private List<SACH> LaySachTheoTuKhoa(string tuKhoa)
+        {
+            return db.SACHes
+                .Include(s => s.VIETSACHes.Select(v => v.TACGIA))
+                .ToList()
+                .Where(s =>
+                    SearchHelper.KhopTuKhoa(s.TenSach, tuKhoa) ||
+                    s.VIETSACHes.Any(v => v.TACGIA != null && SearchHelper.KhopTuKhoa(v.TACGIA.TenTG, tuKhoa)))
+                .OrderByDescending(s => s.NgayCapNhat)
+                .ToList();
         }
 
         private List<TanHoangAnh.SachOnline.Models.SACH> LaySachBanNhieu(int count)
@@ -102,6 +118,19 @@ namespace TanHoangAnh.SachOnline.Controllers
         {
             var sach = from s in db.SACHes where s.MaSach == id select s;
             return View(sach.Single());
+        }
+
+        [HttpGet]
+        public ActionResult TimKiem(string data, int page = 1)
+        {
+            var tuKhoa = (data ?? "").Trim();
+            if (string.IsNullOrEmpty(tuKhoa))
+                return RedirectToAction("Index");
+
+            int size = 6;
+            ViewBag.TuKhoa = tuKhoa;
+            var kq = LaySachTheoTuKhoa(tuKhoa);
+            return View("TimKiem", kq.ToPagedList(page, size));
         }
 
         public ActionResult LoginLogout()

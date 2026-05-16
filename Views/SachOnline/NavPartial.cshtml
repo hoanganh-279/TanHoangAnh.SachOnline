@@ -1,6 +1,6 @@
 ﻿<div class="so-topbar d-none d-lg-block">
     <div class="container d-flex justify-content-between align-items-center">
-        <span><i class="bi bi-envelope me-1"></i> contact@sachonline.vn</span>
+        <span><i class="bi bi-envelope me-1"></i> trungtamtuvan@sachonline.vn</span>
         <span><i class="bi bi-telephone me-1"></i> Hotline: <a href="tel:19001234">1900 1234</a> — Miễn phí vận chuyển đơn từ 300.000đ</span>
     </div>
 </div>
@@ -42,8 +42,8 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex so-search me-lg-3 mb-2 mb-lg-0" role="search">
-                <input class="form-control" type="search" placeholder="Tìm sách, tác giả..." name="data" aria-label="Tìm kiếm" />
+            <form class="d-flex so-search me-lg-3 mb-2 mb-lg-0" role="search" method="get" action="@Url.Action("Index", "SachOnline")">
+                <input class="form-control" type="search" placeholder="Tìm sách, tác giả..." name="data" value="@(Request["data"] ?? "")" aria-label="Tìm kiếm" />
                 <button class="btn btn-search" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <ul class="navbar-nav so-nav-cart align-items-lg-center">

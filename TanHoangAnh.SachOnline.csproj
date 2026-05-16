@@ -147,6 +147,7 @@
     <Compile Include="Controllers\SachOnlineController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -342,6 +343,7 @@
     <Content Include="Views\SachOnline\NhaXuatBanPartial.cshtml" />
     <Content Include="Views\SachOnline\FooterPartial.cshtml" />
     <Content Include="Views\SachOnline\SachTheoChuDe.cshtml" />
+    <Content Include="Views\SachOnline\TimKiem.cshtml" />
     <Content Include="Views\SachOnline\SachTheoNhaXuatBan.cshtml" />
     <Content Include="Views\SachOnline\ChiTietSach.cshtml" />
     <Content Include="Views\SachOnline\GioiThieu.cshtml" />

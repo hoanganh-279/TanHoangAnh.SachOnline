@@ -1,0 +1,97 @@
+@using PagedList.Mvc;
+@using TanHoangAnh.SachOnline.Models;
+@model PagedList.IPagedList<SACH>
+
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var tuKhoa = ViewBag.TuKhoa as string ?? "";
+}
+
+@Styles.Render("~/Content/PagedList.css")
+
+@section NhaXuatBanPartial {
+    @Html.Action("NhaXuatBanPartial", "SachOnline")
+}
+
+@section SachBanNhieuPartial {
+    @Html.Action("SachBanNhieuPartial", "SachOnline")
+}
+
+@section SliderPartial {
+    @Html.Action("SliderPartial", "SachOnline")
+}
+
+@section NavPartial {
+    @Html.Action("NavPartial", "SachOnline")
+}
+
+@section FooterPartial {
+    @Html.Action("FooterPartial", "SachOnline")
+}
+
+<section class="so-section">
+    <header class="so-section-header">
+        <div>
+            <h2>Kết quả tìm kiếm</h2>
+            <p class="subtitle">
+                Từ khóa: <strong>"@tuKhoa"</strong>
+                — Tìm thấy <strong>@Model.TotalItemCount</strong> sách
+            </p>
+        </div>
+    </header>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info text-center py-4">
+            <i class="bi bi-search me-2"></i>
+            Không tìm thấy sách hoặc tác giả phù hợp với "<strong>@tuKhoa</strong>".
+            <br />
+            <a href="@Url.Action("Index", "SachOnline")" class="alert-link">Quay về trang chủ</a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var sach in Model)
+            {
+                <div class="col-sm-6 col-xl-4">
+                    <article class="so-book-card">
+                        <div class="card-cover">
+                            <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })">
+                                <img src="~/Images/@sach.AnhBia" alt="@sach.TenSach" />
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })">@sach.TenSach</a>
+                            </h3>
+                            @{
+                                var tacGia = sach.VIETSACHes != null
+                                    ? string.Join(", ", sach.VIETSACHes.Where(v => v.TACGIA != null).Select(v => v.TACGIA.TenTG))
+                                    : "";
+                            }
+                            @if (!string.IsNullOrEmpty(tacGia))
+                            {
+                                <p class="text-muted small mb-1"><i class="bi bi-person"></i> @tacGia</p>
+                            }
+                            <p class="card-price">@String.Format("{0:#,##0}", sach.GiaBan) ₫</p>
+                            <div class="card-actions">
+                                <a href="@Url.Action("ChiTietSach", "SachOnline", new { id = sach.MaSach })" class="btn-detail">Xem chi tiết</a>
+                                <a href="@Url.Action("ThemGioHang", "GioHang", new { id = sach.MaSach, url = Request.Url.ToString() })" class="btn-cart" title="Thêm vào giỏ">
+                                    <i class="bi bi-cart-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
+
+        <div class="so-pagination-wrap">
+            <p class="text-muted mb-2">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { data = tuKhoa, page = page }),
+                new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } })
+        </div>
+    }
+</section>
